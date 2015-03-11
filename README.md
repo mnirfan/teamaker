@@ -3,7 +3,7 @@
       How to install Tea Package Maker
 ##############################################
 
-open install.sh
+open install.sh as root
 
 ##############################################
 
