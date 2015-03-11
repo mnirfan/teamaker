@@ -1,0 +1,91 @@
+#!/bin/bash
+nama_keterangan="dan_dependensinya"
+profile_dir="/tmp/TEA/pro"
+ruangkerja="/tmp/TEA/workspace"
+filekerja="/tmp/TEA/list"
+apt_archives="/var/cache/apt/archives"
+errchk="/tmp/TEA/errchk"
+
+rm /tmp/TEA/workspace/*
+	if [ $konfirmasi -eq 1 ]; then
+		for stat in `ls -1 "$profile_dir" | grep -v "lock"`; do
+		echo -e "Download-only mode : $stat"
+		gksu "apt-get -d -y --force-yes -o dir::state::status="$profile_dir"/"$stat" -o dir::cache::archives="$apt_archives" install $nama_aplikasi"
+		done		
+
+		  #cek ulang
+		echo -e "\nMemeriksa ulang ketersediaan file .deb\n"
+		jml_tak_ada=0
+		for q1 in `cat "$filekerja"|cut -f1 -d^`; do
+		if [ `ls -1 "$apt_archives" | grep $q1 | wc -l` -gt 0 ]; then
+			echo -e "\033[34m $q1 = Ada"
+		else
+			echo -e "\033[31m $q1 = Tidak ditemukan"
+			jml_tak_ada=$(( $jml_tak_ada + 1 ))
+		fi
+		done
+		echo -e '\e[00m'
+		if [ $jml_tak_ada -eq 0 ]; then
+			echo -e "Semua file telah tersedia\n"
+			echo "0" >> $errchk
+		else
+			echo -e "Maaf, tidak semua file dapat di-download. Silahkan periksa koneksi ke Software Sources Anda.\nProses dibatalkan.\n"
+			echo -e "1" >> $errchk
+			exit 1
+		fi
+	elif [ $konfirmasi -eq 2 ]; then
+		echo -e "Paket yang diperlukan tidak dapat dilengkapi.\nProses dibatalkan.\n"
+		exit 0
+	else
+		echo -e "Pilihan Anda tidak tersedia.\nProses dibatalkan.\n"
+		exit 0
+	fi
+
+  #step 3 : menyalin file & membuat tea
+echo -e "# Menyusun file tea #"
+echo -e "Memproses ... \c"
+rm -rf "$ruangkerja"/partial
+for q1 in `cat "$filekerja"|cut -f1 -d^`; do
+	cp "$apt_archives"/$q1 "$ruangkerja"/$q1
+done
+NUMdeb=`wc -l "$filekerja" | cut -f1 "-d "`
+if [ `ls -1 "$ruangkerja" | wc -l` -eq $NUMdeb ]; then
+	versi=`ls -1 "$ruangkerja" | grep -s "$nama_aplikasi"_ | cut -f2 -d_`
+	echo -e "# File tea #\nSatu file yang memuat file .deb beserta dependensinya.\n\nDibuat untuk aplikasi & profil :\n\n\t\"$nama_aplikasi\"\n\t(versi -$versi-)\n\n`ls -1 "$profile_dir" | grep -v "lock"`\n\nDibuat pada `date +%c`" > "$ruangkerja"/keterangan_tea.txt
+	cd "$ruangkerja"
+	tar -czf file_tea *
+	echo -e "Selesai"
+	nama_file="$nama_aplikasi"_"$nama_keterangan" 
+	nama_file=`echo "$nama_file" | sed s/" "/_/g`
+	#echo -e "Menyimpan dengan nama : "$HOME"/"$nama_file".tea"
+	#if [ -e "$HOME"/"$nama_file".tea ]; then
+	#		echo -e "--\nMaaf, nama file \""$HOME"/"$nama_file".tea\" sudah ada.\nSilahkan masukkan nama lain untuk menyimpan.\n(contoh : "$nama_file"_BARU)\n--\nNama file baru : \c"
+	#		read -r nama_file
+	#fi
+	mv -f file_tea "$HOME"/"$nama_file".tea
+	cd - > /dev/null
+	if [ ! -O "$HOME"/"$nama_file".tea ]; then
+			echo -e "Penyimpanan gagal. Silahkan periksa folder penyimpanan Anda.\nSetting folder penyimpanan Anda saat ini :\n$HOME\n"
+			exit 1
+	fi
+	echo -e "OK"
+	echo -e "\n\n----- Laporan -----\n\nAplikasi yang diproses : $nama_aplikasi\n(versi -$versi-)\nDitujukan untuk profil :\n`ls -m --hide="lock" "$profile_dir"`\n\nSemua proses telah berhasil dilaksanakan.\nFile tea berhasil dibuat :\n"$HOME"/"$nama_file".tea\nsize : `du --si "$HOME"/"$nama_file".tea | cut -f 1`B\nmd5sum : `md5sum "$HOME"/"$nama_file".tea | cut -f1 "-d "`\n"
+else
+	echo -e "\nTerjadi kesalahan ketika penyalinan. Silahkan periksa filesystem Anda.\n"
+	exit 1
+fi
+exit 1
+
+##################
+# --notes--
+##################
+##september 2013
+#script ini bebas dan gratis dimanfaatkan untuk tujuan yang benar
+#jika ada pertanyaan/masukan silahkan kirim email ke 
+#elektronifa[at]yahoo.co.id (maaf, hanya email)
+
+#############################################################################
+#  di-edit seperlunya untuk keperluan pembuatan Tea Package Maker GUI		#
+#  mnirfan, DOSCOM, 2015													#
+#  kritik & saran : twitter @mnirfan25 atau @doscomedia; http://doscom.org	#
+#############################################################################
