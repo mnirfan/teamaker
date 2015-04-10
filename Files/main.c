@@ -6,10 +6,11 @@
 #include <gtk/gtk.h>
 #include <stdbool.h>
 #include <string.h>
+#include <unistd.h>
 
 	// define widgets
 	GtkBuilder *builder;
-	GtkWidget *main_window, *confirm_window,*warn,*invalid_window,*warn3,*success_window1,*info_window;
+	GtkWidget *main_window, *confirm_window,*warn,*invalid_window,*warn3,*success_window1,*info_window, *loading_window;
 	GtkWidget *create_btn,*no_btn,*yes_btn,*open_btn,*warn_oka,*warn_okb,*invalid_btn,*success_ok1,*info_btn,*close_btn;
 	GtkWidget *label_success1;
 	GtkWidget *name;
@@ -158,16 +159,28 @@ void check_depend()
 
 // continue progress when user click 'Ya' on confirmation window
 void lanjutkan()
-{
+	//===============
+{	//GdkWindow *win = gtk_widget_get_window(GTK_WIDGET(yes_btn));
+	//GdkCursor *cur;
+	//==================
 	gchar *tea_errchk,aa[999];
 	gtk_widget_hide (confirm_window);
+	gtk_widget_show(loading_window);
+	//============
+	/*cur = gdk_cursor_new( GDK_CLOCK );
+   gdk_window_set_cursor( win, cur );
+   gdk_cursor_unref( cur );*/
+   while( gtk_events_pending() )
+      gtk_main_iteration();
+	//===============
 	snprintf(command, sizeof(command),
 		 "export nama_aplikasi=\"%s\" konfirmasi=\"1\" profil=\"%s\"; /usr/share/TEA/engine/teamaker2",
 		 gtk_entry_get_text (GTK_ENTRY(name)),path2);
 	system(command);
+	
 	g_file_get_contents ("/tmp/TEA/errchk",&tea_errchk,NULL,NULL);
 	int x11;
-	x11 = atoi(tea_errchk);	
+	x11 = atoi(tea_errchk);
 	if(x11==1)
 	{
 	gtk_widget_show (warn3); 
@@ -178,6 +191,9 @@ void lanjutkan()
 		gtk_label_set_label (GTK_LABEL(label_success1),aa);
 		gtk_widget_show (success_window1);
 	}
+	//================
+	//gdk_window_set_cursor( win, NULL );
+	gtk_widget_hide(loading_window);
 		
 }
 
@@ -198,6 +214,7 @@ main (int argc, char *argv[])
 
 	//Get all object
 	main_window			= GTK_WIDGET(gtk_builder_get_object(builder, "window1"));
+	loading_window		= GTK_WIDGET(gtk_builder_get_object(builder, "warn_window2"));
 	confirm_window		= GTK_WIDGET(gtk_builder_get_object(builder, "confirmation1"));
 	create_btn			= GTK_WIDGET(gtk_builder_get_object(builder, "create_btn1"));
 	no_btn				= GTK_WIDGET(gtk_builder_get_object(builder, "no_btn1"));
@@ -238,6 +255,7 @@ main (int argc, char *argv[])
 	g_signal_connect(G_OBJECT(info_btn), "clicked", G_CALLBACK(show_info), NULL);
 	g_signal_connect(G_OBJECT(close_btn), "clicked", G_CALLBACK(hide_info), NULL);
 	g_signal_connect(G_OBJECT(info_window),"delete_event",G_CALLBACK(hide_info),NULL);
+	g_signal_connect(G_OBJECT(success_window1),"delete_event",G_CALLBACK(hide_success),NULL);
 	g_object_unref(G_OBJECT(builder));
 	gtk_widget_show(main_window);
 	

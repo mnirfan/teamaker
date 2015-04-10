@@ -88,18 +88,6 @@
             <property name="y">28</property>
           </packing>
         </child>
-        <child>
-          <object class="GtkLabel" id="label6">
-            <property name="width_request">450</property>
-            <property name="height_request">20</property>
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="label" translatable="yes">(Aplikasi akan "Freeze" saat proses mengunduh dan memproses file)</property>
-          </object>
-          <packing>
-            <property name="y">204</property>
-          </packing>
-        </child>
       </object>
     </child>
   </object>
@@ -156,7 +144,6 @@ Jangan gunakan huruf kapital</property>
     <property name="width_request">300</property>
     <property name="height_request">120</property>
     <property name="can_focus">False</property>
-    <property name="type">popup</property>
     <property name="title" translatable="yes">Sukses</property>
     <property name="resizable">False</property>
     <property name="window_position">center-always</property>
@@ -199,15 +186,15 @@ Jangan gunakan huruf kapital</property>
     </child>
   </object>
   <object class="GtkTextBuffer" id="textbuffer1">
-    <property name="text" translatable="yes">Terima kasih telah menggunakan Tea Package Maker versi 0.1 Beta
+    <property name="text" translatable="yes">Terima kasih telah menggunakan Tea Package Maker versi 0.5 Beta
 
 Aplikasi ini merupakan pengembangan dari "Alldeb maker" yang dibuat dengan menggunakan bahasa pemrograman C dan GTK+ 3.0 sebagai tampilan antar muka.
 Aplikasi ini dibuat dengan tujuan mempermudah pendistribusian installer offline untuk aplikasi-aplikasi dalam distro keluarga Ubuntu pada umumnya, dan pada distro TeaLinux pada khususnya.
 
 Aplikasi ini bebas diunduh, diedit, dan disebarkan dengan ketentuan mencantumkan nama "Tea Package Maker" dan "Alldeb Maker".
 aplikasi ini dapat diunduh di: 
-http://github.com/mnirfan/teamaker-ID/
-==========================================================
+http://github.com/mnirfan/teamaker/
+________________
 
 Cara menggunakan aplikasi Tea Package Maker:
 
@@ -216,13 +203,13 @@ Anda juga dapat memilih file profil dari fresh-install distro ubuntu yang sudah 
 setelah itu anda harus memasukkan nama aplikasi yang akan di-install.
 PENTING: pastikan nama aplikasi yang anda masukkan benar. anda bisa mengeceknya di synaptic.
 Setelah itu klik tombol buat.
-==========================================================
+________________
 
 Ada pertanyaan, kritik, saran, atau menemukan bug?
 mention saja ke @mnirfan25 atau @doscomedia
 atau bisa ke situs kami:
 http://doscom.org/
-==========================================================
+________________
 
 DISKLAIMER
 
@@ -231,7 +218,7 @@ Seluruh error dan kerusakan apapun yang timbul dari Tea Package Maker adalah tan
 Seluruh keuntungan yang timbul dari Tea Package Maker ini adalah hak milik Anda dan Anda berhak menyebarluaskannya kepada siapa pun.
 
 Ide dasar Tea Package Maker adalah sebatas membantu pengguna desktop supaya bisa membuat installer  aplikasi untuk kebutuhan offline install.
-==========================================================
+________________
 
 Terimaksih kepada:
 
@@ -241,7 +228,7 @@ beserta seluruh kru bengkelubuntu.org
 Para anggota DOSCOM yang mendukung pembuatan Tea Package Maker
 
 Para member grup "Pemrograman Aplikasi Ber-GUI - Berbasis Bahasa Pemrograman C &amp; ekstensi GTK" yang banyak membantu saya belajar GTK dengan bahasa C
-==========================================================
+________________
 
 M Nurul Irfan
 DOSCOM, Maret 2015</property>
@@ -297,7 +284,7 @@ DOSCOM, Maret 2015</property>
                 <property name="height_request">47</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Version 0.1 Beta
+                <property name="label" translatable="yes">Version 0.5 Beta
 Create offline package installer</property>
                 <property name="justify">center</property>
               </object>
@@ -435,8 +422,8 @@ Create offline package installer</property>
     </child>
   </object>
   <object class="GtkWindow" id="warn_window2">
-    <property name="width_request">440</property>
-    <property name="height_request">325</property>
+    <property name="width_request">191</property>
+    <property name="height_request">60</property>
     <property name="can_focus">False</property>
     <property name="title" translatable="yes">loading</property>
     <property name="resizable">False</property>
@@ -451,28 +438,28 @@ Create offline package installer</property>
         <property name="can_focus">False</property>
         <child>
           <object class="GtkLabel" id="label_warn2">
-            <property name="width_request">440</property>
-            <property name="height_request">20</property>
+            <property name="width_request">316</property>
+            <property name="height_request">34</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="label" translatable="yes">sedang mengunduh file yang dibutuhkan sekaligus membuat paket .tea</property>
+            <property name="label" translatable="yes">sedang mengunduh file yang dibutuhkan
+sekaligus membuat paket .tea</property>
             <property name="track_visited_links">False</property>
           </object>
           <packing>
-            <property name="y">8</property>
+            <property name="y">15</property>
           </packing>
         </child>
         <child>
           <object class="GtkSpinner" id="spinner1">
-            <property name="width_request">182</property>
-            <property name="height_request">278</property>
+            <property name="width_request">110</property>
+            <property name="height_request">88</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="active">True</property>
           </object>
           <packing>
-            <property name="x">134</property>
-            <property name="y">37</property>
+            <property name="x">99</property>
+            <property name="y">63</property>
           </packing>
         </child>
       </object>
@@ -530,11 +517,12 @@ Proses dibatalkan.</property>
     <property name="height_request">160</property>
     <property name="visible">True</property>
     <property name="can_focus">False</property>
-    <property name="title" translatable="yes">Tea Package Maker versi 0.1 Beta</property>
+    <property name="title" translatable="yes">Tea Package Maker versi 0.5 Beta</property>
     <property name="resizable">False</property>
     <property name="window_position">center-always</property>
     <property name="default_width">700</property>
     <property name="default_height">300</property>
+    <property name="icon">/usr/share/icons/teamaker.svg</property>
     <child>
       <object class="GtkFixed" id="fixed1">
         <property name="visible">True</property>
@@ -601,14 +589,14 @@ Proses dibatalkan.</property>
         </child>
         <child>
           <object class="GtkLabel" id="label4">
-            <property name="width_request">83</property>
+            <property name="width_request">95</property>
             <property name="height_request">28</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="label" translatable="yes">Nama aplikasi</property>
           </object>
           <packing>
-            <property name="x">44</property>
+            <property name="x">40</property>
             <property name="y">60</property>
           </packing>
         </child>
@@ -622,7 +610,7 @@ Proses dibatalkan.</property>
             <property name="receives_default">True</property>
           </object>
           <packing>
-            <property name="x">15</property>
+            <property name="x">40</property>
             <property name="y">97</property>
           </packing>
         </child>
