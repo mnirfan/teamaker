@@ -43,7 +43,12 @@
             <property name="height_request">31</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
+            <property name="can_default">True</property>
+            <property name="has_default">True</property>
             <property name="receives_default">True</property>
+            <style>
+              <class name="suggested-action"/>
+            </style>
           </object>
           <packing>
             <property name="x">291</property>
@@ -59,20 +64,20 @@
             <property name="label" translatable="yes">Lanjutkan?</property>
           </object>
           <packing>
-            <property name="y">173</property>
+            <property name="y">217</property>
           </packing>
         </child>
         <child>
           <object class="GtkScrolledWindow" id="scrolledwindow1">
             <property name="width_request">422</property>
-            <property name="height_request">126</property>
+            <property name="height_request">175</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="shadow_type">in</property>
             <child>
               <object class="GtkTextView" id="dependency1">
                 <property name="visible">True</property>
-                <property name="can_focus">True</property>
+                <property name="can_focus">False</property>
                 <property name="pixels_above_lines">2</property>
                 <property name="pixels_below_lines">2</property>
                 <property name="editable">False</property>
@@ -129,6 +134,8 @@ Jangan gunakan huruf kapital</property>
             <property name="height_request">31</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
+            <property name="has_focus">True</property>
+            <property name="has_default">True</property>
             <property name="receives_default">True</property>
             <property name="halign">center</property>
           </object>
@@ -175,6 +182,8 @@ Jangan gunakan huruf kapital</property>
             <property name="height_request">31</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
+            <property name="has_focus">True</property>
+            <property name="has_default">True</property>
             <property name="receives_default">True</property>
           </object>
           <packing>
@@ -188,7 +197,7 @@ Jangan gunakan huruf kapital</property>
   <object class="GtkTextBuffer" id="textbuffer1">
     <property name="text" translatable="yes">Terima kasih telah menggunakan Tea Package Maker versi 0.5 Beta
 
-Aplikasi ini merupakan pengembangan dari "Alldeb maker" yang dibuat dengan menggunakan bahasa pemrograman C dan GTK+ 3.0 sebagai tampilan antar muka.
+Aplikasi ini merupakan pengembangan dari "Alldeb maker" yang dibuat dengan menggunakan bahasa pemrograman C dan GTK+ 3 sebagai tampilan antar muka.
 Aplikasi ini dibuat dengan tujuan mempermudah pendistribusian installer offline untuk aplikasi-aplikasi dalam distro keluarga Ubuntu pada umumnya, dan pada distro TeaLinux pada khususnya.
 
 Aplikasi ini bebas diunduh, diedit, dan disebarkan dengan ketentuan mencantumkan nama "Tea Package Maker" dan "Alldeb Maker".
@@ -411,6 +420,8 @@ Create offline package installer</property>
             <property name="height_request">31</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
+            <property name="has_focus">True</property>
+            <property name="has_default">True</property>
             <property name="receives_default">True</property>
           </object>
           <packing>
@@ -502,6 +513,8 @@ Proses dibatalkan.</property>
             <property name="height_request">31</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
+            <property name="has_focus">True</property>
+            <property name="has_default">True</property>
             <property name="receives_default">True</property>
           </object>
           <packing>
@@ -533,6 +546,7 @@ Proses dibatalkan.</property>
             <property name="height_request">29</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
+            <property name="activates_default">True</property>
             <property name="placeholder_text" translatable="yes">ketik nama aplikasi, misal: vlc</property>
             <property name="populate_all">True</property>
           </object>
@@ -614,9 +628,6 @@ Proses dibatalkan.</property>
             <property name="y">97</property>
           </packing>
         </child>
-        <style>
-          <class name="suggested-action"/>
-        </style>
       </object>
     </child>
   </object>
