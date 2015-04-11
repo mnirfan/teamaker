@@ -6,8 +6,6 @@
 open install.sh as root
 
 ##############################################
-to compile this app you must have:
-	gcc
-	libgtk-3-dev
+to compile this app you must have gcc and libgtk-3-dev
 
 
